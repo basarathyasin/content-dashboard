@@ -1,4 +1,6 @@
+import DashboardLayout from "@/components/layout/DashboardLayout";
 import Providers from "./providers/Provider";
+import "./styles/globals.css"
 
 export default function RootLayout({
   children,
@@ -6,9 +8,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning >
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <DashboardLayout>
+
+          {children}
+          </DashboardLayout>
+          </Providers>
       </body>
     </html>
   );
