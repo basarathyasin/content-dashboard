@@ -6,16 +6,6 @@ interface FavoritesState {
 }
 
 //? Load From Local Storage
-const loadFavorites = (): ContentItem[] => {
-  if (typeof window === "undefined") return [];
-
-  try {
-    const stored = localStorage.getItem("favorites");
-    return stored ? JSON.parse(stored) : [];
-  } catch {
-    return [];
-  }
-};
 
 const initialState: FavoritesState = {
   items: [],
