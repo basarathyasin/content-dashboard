@@ -1,22 +1,37 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice,} from "@reduxjs/toolkit";
 
-interface PreferencesState {
-  categories: string[];
+export interface PreferencesState {
+  showNews: boolean;
+  showMovies: boolean;
+  showSocial: boolean;
 }
 
 const initialState: PreferencesState = {
-  categories: [],
+  showNews: true,
+  showMovies: true,
+  showSocial: true,
 };
 
 const preferencesSlice = createSlice({
   name: "preferences",
   initialState,
   reducers: {
-    setCategories(state, action: PayloadAction<string[]>) {
-      state.categories = action.payload;
+    toggleNews(state) {
+      state.showNews = !state.showNews;
+    },
+    toggleMovies(state) {
+      state.showMovies = !state.showMovies;
+    },
+    toggleSocial(state) {
+      state.showSocial = !state.showSocial;
     },
   },
 });
 
-export const { setCategories } = preferencesSlice.actions;
+export const {
+  toggleNews,
+  toggleMovies,
+  toggleSocial,
+} = preferencesSlice.actions;
+
 export default preferencesSlice.reducer;

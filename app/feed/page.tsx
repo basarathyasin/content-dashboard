@@ -19,6 +19,7 @@ import { useGetTrendingMoviesQuery } from "@/app/services/api/movieApi";
 import { useGetSocialPostsQuery } from "@/app/services/api/socialApi";
 import { normalizeSocial } from "@/app/utils/normalizeSocial";
 
+
 export default function FeedPage() {
 	const searchQuery = useAppSelector((state) => state.ui.searchQuery);
 	const debouncedQuery = useDebounce(searchQuery, 500);
@@ -37,6 +38,10 @@ export default function FeedPage() {
 	const { data: socialData, isLoading: socialLoading } =
 		useGetSocialPostsQuery();
 
+		const preferences = useAppSelector(
+  (state) => state.preferences
+);
+
 
 	const newsContent: ContentItem[] = data ? normalizeNews(data.articles) : [];
 
@@ -48,7 +53,11 @@ export default function FeedPage() {
   : [];
 
 
-	const normalizedContent: ContentItem[] = [...newsContent, ...movieContent, ...socialContent];
+	const normalizedContent: ContentItem[] = [
+  ...(preferences.showNews ? newsContent : []),
+  ...(preferences.showMovies ? movieContent : []),
+  ...(preferences.showSocial ? socialContent : []),
+];
 
 	const [manualOrder, setManualOrder] = useState<string[]>([]);
 
