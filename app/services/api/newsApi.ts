@@ -7,6 +7,7 @@ interface NewsQueryParams {
 }
 
 export const newsApi = baseApi.injectEndpoints({
+    overrideExisting: true,
 	endpoints: (builder) => ({
 		getTopHeadlines: builder.query<NewsResponse, NewsQueryParams>({
 			query: ({ searchTerm, page }) => ({
