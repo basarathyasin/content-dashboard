@@ -1,38 +1,55 @@
 "use client";
 
-import { useGetTrendingNewsQuery } from "../services/api/newsApi";
-import { normalizeNews } from "../utils/normalizeContent";
-import ContentCard from "@/components/content/ContentCard";
+import { useGetTrendingMoviesQuery } from "@/app/services/api/movieApi";
+import { useGetTopHeadlinesQuery } from "@/app/services/api/newsApi";
+import { useGetSocialPostsQuery } from "@/app/services/api/socialApi";
+
+import { normalizeNews } from "@/app/utils/normalizeContent";
+import { normalizeMovies } from "@/app/utils/normalizeMovies";
+import { normalizeSocial } from "@/app/utils/normalizeSocial";
+
+
+import type { ContentItem } from "@/app/types/content";
+import SortableGrid from "@/components/content/SortableGrid";
 
 export default function TrendingPage() {
-  const { data, isLoading, isError } =
-    useGetTrendingNewsQuery();
+  const { data: newsData, isLoading: newsLoading } =
+    useGetTopHeadlinesQuery({
+      searchTerm: "trending",
+      page: 1,
+    });
 
-  if (isLoading)
-    return <div className="p-6">Loading trending news...</div>;
+  const { data: movieData, isLoading: movieLoading } =
+    useGetTrendingMoviesQuery();
 
-  if (isError)
-    return (
-      <div className="p-6 text-red-500">
-        Error loading trending news
-      </div>
-    );
+  const { data: socialData, isLoading: socialLoading } =
+    useGetSocialPostsQuery();
 
-  const normalizedContent = data
-    ? normalizeNews(data.articles)
-    : [];
+  if (newsLoading || movieLoading || socialLoading)
+    return <div className="p-6">Loading trending content...</div>;
+
+  const newsContent: ContentItem[] =
+    newsData ? normalizeNews(newsData.articles) : [];
+
+  const movieContent: ContentItem[] =
+    movieData ? normalizeMovies(movieData.results) : [];
+
+  const socialContent: ContentItem[] =
+    socialData ? normalizeSocial(socialData.posts) : [];
+
+  const trendingContent = [
+    ...newsContent,
+    ...movieContent,
+    ...socialContent,
+  ];
 
   return (
     <div className="p-6 space-y-6">
       <h1 className="text-2xl font-bold">
-        Trending News
+        Trending Across Platform
       </h1>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {normalizedContent.map((item) => (
-          <ContentCard key={item.id} item={item} />
-        ))}
-      </div>
+      <SortableGrid items={trendingContent} />
     </div>
   );
 }

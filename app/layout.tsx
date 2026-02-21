@@ -3,6 +3,7 @@ import Providers from "./providers/Provider";
 import "./styles/globals.css";
 import ThemeProvider from "./providers/ThemeProvider";
 import FavoritesHydrator from "./providers/FavoritesHydrator";
+import PreferencesHydrator from "./providers/PreferencesHydrator";
 
 export default function RootLayout({
   children,
@@ -14,6 +15,7 @@ export default function RootLayout({
       <body>
         <Providers>
           <FavoritesHydrator />
+           <PreferencesHydrator />
           <ThemeProvider>
             <DashboardLayout>{children}</DashboardLayout>
           </ThemeProvider>

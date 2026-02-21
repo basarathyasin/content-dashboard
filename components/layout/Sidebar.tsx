@@ -8,6 +8,7 @@ import {
   toggleMovies,
   toggleSocial,
 } from "@/app/slices/preferencesSlice";
+import { useEffect } from "react";
 
 const navItems = [
   { name: "Feed", path: "/feed" },
@@ -21,6 +22,13 @@ export default function Sidebar() {
   const preferences = useAppSelector(
     (state) => state.preferences
   );
+
+  useEffect(() => {
+  localStorage.setItem(
+    "preferences",
+    JSON.stringify(preferences)
+  );
+}, [preferences]);
 
   return (
     <aside className="h-full p-6 space-y-8 bg-gray-100 dark:bg-gray-900 transition-colors">
