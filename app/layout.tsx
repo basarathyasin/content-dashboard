@@ -2,6 +2,7 @@ import DashboardLayout from "@/components/layout/DashboardLayout";
 import Providers from "./providers/Provider";
 import "./styles/globals.css";
 import ThemeProvider from "./providers/ThemeProvider";
+import FavoritesHydrator from "./providers/FavoritesHydrator";
 
 export default function RootLayout({
   children,
@@ -12,6 +13,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body>
         <Providers>
+          <FavoritesHydrator />
           <ThemeProvider>
             <DashboardLayout>{children}</DashboardLayout>
           </ThemeProvider>

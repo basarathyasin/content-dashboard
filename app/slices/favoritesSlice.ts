@@ -18,7 +18,7 @@ const loadFavorites = (): ContentItem[] => {
 };
 
 const initialState: FavoritesState = {
-  items: loadFavorites(),
+  items: [],
 };
 
 const favoritesSlice = createSlice({
