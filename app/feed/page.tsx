@@ -1,33 +1,23 @@
 "use client";
 
 import { useGetTopHeadlinesQuery } from "../services/api/newsApi";
+import { normalizeNews } from "../utils/normalizeContent";
+import ContentCard from "@/components/content/ContentCard";
 
 export default function FeedPage() {
-  const { data, isLoading, isError, error } =
-    useGetTopHeadlinesQuery("technology");
+	const { data, isLoading, isError } = useGetTopHeadlinesQuery("technology");
 
-  if (isLoading) return <div className="p-6">Loading...</div>;
+	if (isLoading) return <div className="p-6">Loading...</div>;
 
-  if (isError){
-    console.log(error);
-    return <div className="p-6 text-red-500">Error loading news</div>
-  }
+	if (isError)
+		return <div className="p-6 text-red-500">Error loading news</div>;
+  const normalizedContent = data ? normalizeNews(data.articles): [];
 
-  return (
-    <div className="p-6 space-y-4">
-      {data?.articles.map((article, index) => (
-        <div
-          key={index}
-          className="p-4 border rounded-lg bg-white dark:bg-gray-900"
-        >
-          <h2 className="text-lg font-bold">
-            {article.title}
-          </h2>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            {article.description}
-          </p>
-        </div>
+	return (
+<div className="p-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {normalizedContent.map((item) => (
+        <ContentCard key={item.id} item={item} />
       ))}
     </div>
-  );
+	);
 }
