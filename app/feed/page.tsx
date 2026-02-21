@@ -7,14 +7,15 @@ import { useGetTopHeadlinesQuery } from "@/app/services/api/newsApi";
 import { normalizeNews } from "../utils/normalizeContent";
 import { useDebounce } from "@/app/hooks/useDebounce";
 import SortableCard from "@/components/content/SortableCard";
-
+import { normalizeMovies } from "../utils/normalizeMovies";
 import { ContentItem } from "../types/content";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import {
 	SortableContext,
-	verticalListSortingStrategy,
+	rectSortingStrategy,
 	arrayMove,
 } from "@dnd-kit/sortable";
+import { useGetTrendingMoviesQuery } from "@/app/services/api/movieApi";
 
 export default function FeedPage() {
   const searchQuery = useAppSelector((state) => state.ui.searchQuery);
@@ -28,8 +29,19 @@ export default function FeedPage() {
       page,
     });
 
-  const normalizedContent: ContentItem[] =
-    data ? normalizeNews(data.articles) : [];
+	  const { data: movieData, isLoading: moviesLoading } =
+  useGetTrendingMoviesQuery();
+
+const newsContent: ContentItem[] =
+  data ? normalizeNews(data.articles) : [];
+
+const movieContent: ContentItem[] =
+  movieData ? normalizeMovies(movieData.results) : [];
+
+const normalizedContent: ContentItem[] = [
+  ...newsContent,
+  ...movieContent,
+];
 
   const [manualOrder, setManualOrder] = useState<string[]>([]);
 
@@ -57,7 +69,7 @@ const handleDragEnd = (event: DragEndEvent) => {
     setManualOrder(reordered.map((item) => item.id));
   }
 };
-  if (isLoading)
+  if (isLoading ||moviesLoading)
     return <div className="p-6">Loading...</div>;
 
   if (isError)
@@ -75,7 +87,7 @@ const handleDragEnd = (event: DragEndEvent) => {
       >
         <SortableContext
           items={items.map((item) => item.id)}
-          strategy={verticalListSortingStrategy}
+          strategy={rectSortingStrategy}
         >
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {items.map((item) => (
