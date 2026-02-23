@@ -1,26 +1,37 @@
 "use client";
 
 import { useAppSelector } from "@/app/store/hooks";
-import ContentCard from "@/components/content/ContentCard";
+import SortableGrid from "@/components/content/SortableGrid";
+import { useState } from "react";
+import Pagination from "@/components/ui/Pagination";
 
 export default function FavoritesPage() {
-  const favorites = useAppSelector(
-    (state) => state.favorites.items
-  );
+	const [page, setPage] = useState(1);
+	const ITEMS_PER_PAGE = 9;
+	const favorites = useAppSelector((state) => state.favorites.items);
+	const totalPages = Math.ceil(favorites.length / ITEMS_PER_PAGE);
 
-  if (favorites.length === 0) {
-    return (
-      <div className="p-6 text-gray-500">
-        No favorites yet.
-      </div>
-    );
-  }
+	const paginatedItems = favorites.slice(
+		(page - 1) * ITEMS_PER_PAGE,
+		page * ITEMS_PER_PAGE,
+	);
 
-  return (
-    <div className="p-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {favorites.map((item) => (
-        <ContentCard key={item.id} item={item} />
-      ))}
-    </div>
-  );
+	if (!favorites.length) {
+		return <div className="p-6 text-gray-500">No favorites yet.</div>;
+	}
+
+	return (
+		<div className="p-6 space-y-6">
+			<h1 className="text-2xl font-bold">Your Favorites</h1>
+
+			<SortableGrid items={paginatedItems} />
+			{favorites.length > 0 && (
+				<Pagination
+					page={page}
+					totalPages={totalPages}
+					onPageChange={setPage}
+				/>
+			)}
+		</div>
+	);
 }

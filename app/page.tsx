@@ -1,8 +1,6 @@
-import React from 'react'
-export default function Home() {
-  return (
-<>
-</>
 
-  )
+
+import { redirect } from 'next/navigation'
+export default function Home() {
+  redirect("/feed")
 }

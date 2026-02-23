@@ -9,7 +9,7 @@ export function normalizeSocial(
     type: "social",
     title: `@${post.username}`,
     description: post.content,
-    image: "",
+    image: post.image,
     link: "#",
   }));
 }

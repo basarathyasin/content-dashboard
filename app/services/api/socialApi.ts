@@ -15,15 +15,17 @@ export const socialApi = baseApi.injectEndpoints({
             posts: [
               {
                 id: "social-1",
+                image:"https://images.pexels.com/photos/8090137/pexels-photo-8090137.jpeg",
                 username: "john_doe",
                 content:
-                  "Loving the new AI-powered dashboards 🔥",
+                  "Hey There, Let have Some Fun 🔥",
               },
               {
                 id: "social-2",
+                image:"https://images.pexels.com/photos/576922/pexels-photo-576922.jpeg",
                 username: "tech_girl",
                 content:
-                  "Next.js + RTK Query is such a powerful combo!",
+                  "Did you about latest Flagship phones 2026 ?",
               },
             ],
           },

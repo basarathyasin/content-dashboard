@@ -3,6 +3,6 @@ export interface ContentItem {
   type: "news" | "movie" | "social";
   title: string;
   description: string;
-  image: string;
+  image?: string;
   link: string;
 }
