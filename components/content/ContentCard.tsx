@@ -5,6 +5,7 @@ import { toggleFavorite } from "@/app/slices/favoritesSlice";
 import type { ContentItem } from "@/app/types/content";
 import Image from "next/image";
 
+
 interface Props {
 	item: ContentItem;
 }
@@ -27,7 +28,7 @@ export default function ContentCard({ item }: Props) {
 							sizes="(max-width: 768px) 100vw, 33vw"
 							className="object-cover transition-opacity duration-300"
 							loading="lazy"
-						/> 
+						/>
 						<div className="card-image-overlay" />
 					</div>
 				) : (
@@ -60,6 +61,14 @@ export default function ContentCard({ item }: Props) {
 				{/* Body */}
 				<div className="card-body">
 					<h2 className="card-title">{item.title}</h2>
+					{item.reasons && item.reasons.length > 0 && (
+						<div className="mt-1">
+							<span className="inline-block text-xs px-2 py-1 rounded-full bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 font-medium">
+								{item.reasons[0]}
+							</span>
+						</div>
+					)}
+
 					<p className="card-desc">{item.description}</p>
 
 					<div className="card-footer">

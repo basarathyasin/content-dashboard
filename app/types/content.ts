@@ -1,8 +1,12 @@
 export interface ContentItem {
   id: string;
-  type: "news" | "movie" | "social";
   title: string;
-  description: string;
+  description?: string;
   image?: string;
-  link: string;
+  link?: string;
+  type: "news" | "movie" | "social";
+
+  // 🔥 Optional recommendation metadata
+  score?: number;
+  reasons?: string[];
 }

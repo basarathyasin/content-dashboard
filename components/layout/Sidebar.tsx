@@ -13,6 +13,7 @@ import { useEffect } from "react";
 const navItems = [
 	{ name: "Feed", path: "/feed", icon: "▦" },
 	{ name: "Trending", path: "/trending", icon: "↑" },
+	{name: "Recommendations" ,path:"/recommendations",icon:"⋈"},
 	{ name: "Favorites", path: "/favorites", icon: "♡" },
 ];
 
