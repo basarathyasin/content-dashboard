@@ -76,7 +76,7 @@ export default function Sidebar() {
 
 					<div className="flex flex-col gap-3">
 						<p className="text-[11px] font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500 px-3">
-							Content
+							Preferences
 						</p>
 						{preferenceItems.map(({ label, key, toggle }) => (
 							<label

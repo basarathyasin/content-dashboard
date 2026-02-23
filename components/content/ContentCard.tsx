@@ -24,14 +24,14 @@ export default function ContentCard({ item }: Props) {
 							src={item.image}
 							alt={item.title}
 							fill
-							sizes="(max-width: 768px) 100vw, 400px"
-							className="object-cover"
-						/>
+							sizes="(max-width: 768px) 100vw, 33vw"
+							className="object-cover transition-opacity duration-300"
+							loading="lazy"
+						/> 
 						<div className="card-image-overlay" />
 					</div>
 				) : (
-
-          <div className="no-image-placeholder">
+					<div className="no-image-placeholder">
 						<svg
 							viewBox="0 0 24 24"
 							fill="none"
@@ -43,7 +43,6 @@ export default function ContentCard({ item }: Props) {
 							<path d="M21 15l-5-5L5 21" />
 						</svg>
 					</div>
-					
 				)}
 
 				{/* Favorite Button */}
