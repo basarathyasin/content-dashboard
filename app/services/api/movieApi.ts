@@ -8,7 +8,7 @@ export const movieApi = baseApi.injectEndpoints({
       query: () => ({
         url: `https://api.themoviedb.org/3/trending/movie/week`,
         params: {
-          api_key: process.env.NEXT_PUBLIC_TMDB_API_KEY,
+          api_key: process.env.TMDB_API_KEY,
         },
       }),
     }),

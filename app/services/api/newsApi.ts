@@ -15,7 +15,7 @@ export const newsApi = baseApi.injectEndpoints({
 					q: searchTerm || "technology",
 					sortBy: "publishedAt",
 					pageSize: 30,
-					apiKey: process.env.NEXT_PUBLIC_NEWS_API_KEY,
+					apiKey: process.env.NEWS_API_KEY,
 				},
 			}),
 		}),
@@ -25,7 +25,7 @@ export const newsApi = baseApi.injectEndpoints({
 				params: {
 					country: "ind",
 					pageSize: 30,
-					apiKey: process.env.NEXT_PUBLIC_NEWS_API_KEY,
+					apiKey: process.env.NEWS_API_KEY,
 				},
 			}),
 		}),
