@@ -17,7 +17,7 @@ export default function ContentCard({ item }: Props) {
 
 	return (
 		<>
-			<article className="content-card">
+			<article className="content-card" data-testid="content-card">
 				{/* Image */}
 				{item.image ? (
 					<div className="card-image">
