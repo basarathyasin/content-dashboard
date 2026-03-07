@@ -7,15 +7,9 @@ This project was developed as part of an SDE Intern Frontend assignment to demon
 
 ---
 
-## 🚀 Live Demo
-
-> Add deployed link here (if available)
-
----
-
 ## 📂 GitHub Repository
 
-> Add repository link here
+> [Add repository link here](https://github.com/basarathyasin/content-dashboard)
 
 ---
 
